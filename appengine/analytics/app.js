@@ -45,10 +45,9 @@ const trackEvent = (category, action, label, value) => {
     // Event value.
     ev: value,
   };
-
-  return fetch('http://www.google-analytics.com/debug/collect', {
-    params: data,
-  });
+  
+  const searchParams = new URLSearchParams(data);
+  return fetch(`${GA_TRACKING_URL}?${searchParams}`);
 };
 
 app.get('/', async (req, res, next) => {
